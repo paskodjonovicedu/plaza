@@ -22,4 +22,8 @@ class LezaljkaController {
         }
         render([success:true,data: data] as JSON)
     }
+    def getAllBeaches() {
+        def data = []
+        def allTypes = Plaza.findAllByIsActive(true)
+    }
 }

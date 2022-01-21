@@ -38,7 +38,9 @@
 
 <script>
     const saveMethodUrl = '${g.createLink(controller: 'lezaljka',action: 'saveRecord')}',
-          loadTypesUrl = '${g.createLink(controller: 'lezaljka',action: 'getAllTypes')}'
+          loadTypesUrl = '${g.createLink(controller: 'lezaljka',action: 'getAllTypes')}',
+        loadBeachesUrl = '${g.createLink(controller: 'lezaljka', action: get)}'
+
 </script>
 <asset:javascript src="lezaljka/lezaljka.js"/>
 </body>
