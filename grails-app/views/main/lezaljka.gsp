@@ -21,6 +21,11 @@
             </select>
         </div>
         <div class="col-lg-3">
+            <label class="form-label">Plaza</label>
+            <select class="form-control" id="plaza">
+            </select>
+        </div>
+        <div class="col-lg-3">
             <label class="form-label">Cijena</label>
             <input type="number" class="form-control" id="cijena"/>
         </div>

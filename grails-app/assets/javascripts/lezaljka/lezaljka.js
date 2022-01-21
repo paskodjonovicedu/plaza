@@ -2,9 +2,11 @@ document.querySelector("#saveButton").addEventListener("click",saveRecordMethod)
 loadTypes();
 function saveRecordMethod(){
     let tipLezaljke = document.querySelector("#tipLezaljke").value;
+    let plaza = document.querySelector("#plaza").value;
     let cijena = document.querySelector("#cijena").value;
     let params = new FormData();
     params.append("tipLezaljke",tipLezaljke);
+    params.append("plaza",plaza)
     params.append("cijena",cijena);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', saveMethodUrl, true);
