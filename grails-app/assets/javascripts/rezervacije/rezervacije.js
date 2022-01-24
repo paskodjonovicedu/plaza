@@ -4,9 +4,14 @@ loadLezaljke();
 function saveRecordMethod(){
     let korisnik = document.querySelector("#korisnik").value;
     let lezaljka = document.querySelector("#lezaljka").value;
+    let datumPocetka = document.querySelector("#datumPocetka").value;
+    let datumKraja = document.querySelector("#datumKraja").value;
+
     let params = new FormData();
     params.append("korisnik",korisnik);
     params.append("lezaljka",lezaljka);
+    params.append("datumPocetka", datumPocetka);
+    params.append("datumKraja", datumKraja);
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', saveMethodUrl, true);

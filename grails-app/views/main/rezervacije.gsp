@@ -20,18 +20,21 @@
             <select class="form-control" id="korisnik">
             </select>
         </div>
+
         <div class="col-lg-3">
             <label class="form-label">Lezaljka</label>
             <select class="form-control" id="lezaljka">
             </select>
         </div>
+
         <div class="col-lg-3">
             <label class="form-label">Datum pocetka</label>
-            <input type="date" class="form-control" id="datumPocetka"/>
+            <input type="datetime-local" class="form-control" id="datumPocetka"/>
         </div>
+
         <div class="col-lg-3">
             <label class="form-label">Datum kraja</label>
-            <input type="date" class="form-control" id="datumKraja"/>
+            <input type="datetime-local" class="form-control" id="datumKraja"/>
         </div>
 
         <div class="col-lg-12 pt-3">
@@ -41,6 +44,7 @@
 
     </div>
 </div>
+
 <script>
     const loadUsersUrl = '${g.createLink(controller: 'rezervacije',action: 'getAllUsers')}',
         loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}',
