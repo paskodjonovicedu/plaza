@@ -43,10 +43,8 @@
 </div>
 <script>
     const loadUsersUrl = '${g.createLink(controller: 'rezervacije',action: 'getAllUsers')}',
-        loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllBeaches')}',
-        saveMethodUrl = '${g.createLink(controller: 'lezaljka',action: 'saveRecord')}'
-
-
+        loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}',
+        saveMethodUrl = '${g.createLink(controller: 'lezaljka',action: 'saveBeach')}';
 </script>
 <asset:javascript src="rezervacije/rezervacije.js"/>
 

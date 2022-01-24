@@ -9,5 +9,7 @@ class Rezervacije {
     Date datumKraja
 
     static constraints = {
+        datumPocetka nullable: true
+        datumKraja nullable: true
     }
 }

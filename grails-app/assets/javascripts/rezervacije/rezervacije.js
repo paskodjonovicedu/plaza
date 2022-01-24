@@ -1,14 +1,12 @@
 document.querySelector("#saveButton").addEventListener("click",saveRecordMethod);
-loadUsers()
-loadLezaljke()
+loadUsers();
+loadLezaljke();
 function saveRecordMethod(){
     let korisnik = document.querySelector("#korisnik").value;
     let lezaljka = document.querySelector("#lezaljka").value;
-
-
     let params = new FormData();
     params.append("korisnik",korisnik);
-    params.append("lezaljka",lezaljka)
+    params.append("lezaljka",lezaljka);
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', saveMethodUrl, true);
