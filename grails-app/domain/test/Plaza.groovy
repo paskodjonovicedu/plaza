@@ -6,6 +6,7 @@ class Plaza {
     Date lastUpdated
     Boolean isActive = true
 
+
     static constraints = {
     }
 }

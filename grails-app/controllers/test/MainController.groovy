@@ -17,4 +17,10 @@ class MainController {
     def lezaljka() {
         render(view: "lezaljka")
     }
+    def plaza() {
+        render(view: "plaza")
+    }
+    def rezervacije() {
+        render(view: "rezervacije")
+    }
 }

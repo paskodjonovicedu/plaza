@@ -5,10 +5,10 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class LezaljkaController {
-    def saveRecord() {
+    def saveRecord () {
         Lezaljka lezaljka = new Lezaljka()
         lezaljka.tipLezaljke = TipLezaljke.get(params.tipLezaljke as Long)
-        lezaljka.plaza = Plaza.get(params.plazaId as Long)
+        lezaljka.plaza = Plaza.get(params.plaza as Long)
         lezaljka.cijena = params.cijena as Double
         lezaljka.save()
         render([success: true, message: "Uspjesno ste kreirali lezaljku!"] as JSON)
@@ -24,6 +24,10 @@ class LezaljkaController {
     }
     def getAllBeaches() {
         def data = []
-        def allTypes = Plaza.findAllByIsActive(true)
+        def allBeaches = Plaza.findAllByIsActive(true)
+        allBeaches.each {beach->
+            data += [id: beach.id, name: beach.naziv]
+        }
+        render([success:true,data: data] as JSON)
     }
 }

@@ -1,5 +1,6 @@
 document.querySelector("#saveButton").addEventListener("click",saveRecordMethod);
 loadTypes();
+loadBeaches();
 function saveRecordMethod(){
     let tipLezaljke = document.querySelector("#tipLezaljke").value;
     let plaza = document.querySelector("#plaza").value;
@@ -66,8 +67,8 @@ function loadTypes(){
     }
 }
 function loadBeaches(){
-    let tipLezaljke= document.querySelector("#tipLezaljke");
-    tipLezaljke.innerHTML = "";
+    let plaza= document.querySelector("#plaza");
+    plaza.innerHTML = "";
     let params = new FormData();
     let xhr = new XMLHttpRequest();
     xhr.open('POST', loadBeachesUrl, true);
@@ -81,7 +82,7 @@ function loadBeaches(){
                         let option = document.createElement("option");
                         option.value = response.id;
                         option.text = response.name;
-                        tipLezaljke.appendChild(option);
+                        plaza.appendChild(option);
                     });
                 }
             }

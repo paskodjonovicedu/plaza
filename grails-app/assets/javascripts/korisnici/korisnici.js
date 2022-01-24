@@ -35,7 +35,6 @@ params.append("email",mail);
                         timer: 1500
                     });
                 }
-
             }
         }
     }
