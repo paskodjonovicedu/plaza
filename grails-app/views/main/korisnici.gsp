@@ -5,7 +5,7 @@
   Time: 1:20 PM
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="test.KorisnikController" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="layout"/>
@@ -34,6 +34,28 @@
 
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="tabela" border="1">
+            <tr>
+                <th>ID</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+            </tr>
+            <g:each in="${allUsers}" var="thisUser">
+                <tr>
+                    <td>${thisUser.id}</td>
+                    <td>${thisUser.ime}</td>
+                    <td>${thisUser.prezime}</td>
+                </tr>
+            </g:each>
+        </table>
+    </div>
+
+</div>
+
+
 <script>
     const saveMethodUrl = '${g.createLink(controller: 'korisnik',action: 'save')}';
 </script>

@@ -10,17 +10,24 @@ class MainController {
         render(view: "index")
     }
 
-    def korisnici(){
-        render(view: "korisnici")
+    def korisnici() {
+        def korisniciList = Korisnik.findAllByIsActive(true)
+        render(view: "korisnici", model: [allUsers: korisniciList])
     }
 
     def lezaljka() {
-        render(view: "lezaljka")
+        def lezaljkeList = Lezaljka.findAllByIsActive(true)
+        render(view: "lezaljka", model: [allLez: lezaljkeList])
     }
+
     def plaza() {
-        render(view: "plaza")
+        def plazaList = Plaza.findAllByIsActive(true)
+        render(view: "plaza", model: [allBeaches: plazaList])
     }
+
     def rezervacije() {
-        render(view: "rezervacije")
+        def rezervacijeList = Rezervacije.findAll()
+        render(view: "rezervacije", model: [allRes: rezervacijeList])
     }
+
 }

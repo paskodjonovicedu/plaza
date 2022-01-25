@@ -45,6 +45,37 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-lg-12">
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>ID lezaljke</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Plaza</th>
+                <th>Mobilijar</th>
+                <th>Cijena</th>
+                <th>Datum pocetka</th>
+                <th>Datum kraja</th>
+            </tr>
+            <g:each in="${allRes}" var="thisRes">
+                <tr>
+                    <td>${thisRes.id}</td>
+                    <td>${thisRes.lezaljka.id}</td>
+                    <td>${thisRes.korisnik.ime}</td>
+                    <td>${thisRes.korisnik.prezime}</td>
+                    <td>${thisRes.lezaljka.plaza.naziv}</td>
+                    <td>${thisRes.lezaljka.tipLezaljke.naziv}</td>
+                    <td>${thisRes.lezaljka.cijena} €</td>
+                    <td>${thisRes.datumPocetka}</td>
+                    <td>${thisRes.datumKraja}</td>
+                </tr>
+            </g:each>
+        </table>
+    </div>
+</div>
+
 <script>
     const loadUsersUrl = '${g.createLink(controller: 'rezervacije',action: 'getAllUsers')}',
         loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}',

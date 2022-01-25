@@ -592,3 +592,14 @@ img.grails-logo {
     height:340px;
     margin-top:-10px;
 }
+table th, table td {
+    padding: 10px;
+}
+/*.tabela {*/
+/*    margin: 0 auto;*/
+/*}*/
+.hkater {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}

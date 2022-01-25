@@ -1,4 +1,5 @@
 document.querySelector("#saveButton").addEventListener("click",saveRecordMethod);
+loadUsers()
 function saveRecordMethod(){
 let ime = document.querySelector("#ime").value;
 let prezime = document.querySelector("#prezime").value;
@@ -33,6 +34,30 @@ params.append("email",mail);
                         title: jsonResponse["message"],
                         showConfirmButton: false,
                         timer: 1500
+                    });
+                }
+            }
+        }
+    }
+}
+
+function loadUsers(){
+    let tipLezaljke= document.querySelector("#tipLezaljke");
+    tipLezaljke.innerHTML = "";
+    let params = new FormData();
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', loadTypesUrl, true);
+    xhr.send(params);
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            if (this.status === 200) {
+                let jsonResponse = JSON.parse(xhr.responseText);
+                if(jsonResponse["success"] === true && jsonResponse["data"].length > 0){
+                    jsonResponse["data"].forEach( function (response) {
+                        let option = document.createElement("option");
+                        option.value = response.id;
+                        option.text = response.name;
+                        tipLezaljke.appendChild(option);
                     });
                 }
             }

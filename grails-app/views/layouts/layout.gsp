@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
     <script src="https://kit.fontawesome.com/072d6083ea.js" crossorigin="anonymous"></script>
+    <asset:stylesheet src="main.css"></asset:stylesheet>
     <asset:stylesheet src="mainmin.css"></asset:stylesheet>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <g:layoutHead/>
@@ -31,10 +32,10 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-umbrella-beach"></i>
             </div>
 
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">Rezervacija Lezaljke</div>
         </a>
 
         <!-- Divider -->
@@ -42,10 +43,12 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+            <g:link controller="main" action="index" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Pocetna</span>
+            </g:link>
         </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -57,29 +60,30 @@
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <g:link controller="main" action="korisnici" class="nav-link">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-user"></i>
                 <span>Korisnici</span>
             </g:link>
         </li>
         <li class="nav-item">
             <g:link controller="main" action="lezaljka" class="nav-link">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-bed"></i>
                 <span>Lezaljka</span>
             </g:link>
         </li>
+    <li class="nav-item">
+        <g:link controller="main" action="plaza" class="nav-link">
+            <i class="fas fa-umbrella-beach"></i>
+            <span>Plaza</span>
+        </g:link>
+    </li>
+    <li class="nav-item">
+        <g:link controller="main" action="rezervacije" class="nav-link">
+            <i class="fas fa-book"></i>
+            <span>Rezervacije</span>
+        </g:link>
+    </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
 
     </ul>
     <!-- End of Sidebar -->
@@ -279,7 +283,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Pasko Djonovic</span>
                             <g:img dir="images" file="undraw_profile.svg" class="img-profile rounded-circle"></g:img>
 
                         </a>
