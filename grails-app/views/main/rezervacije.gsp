@@ -13,66 +13,70 @@
 </head>
 
 <body>
-<div class="p-5">
-    <div class="row">
-        <div class="col-lg-3">
-            <label class="form-label">Korisnik</label>
-            <select class="form-control" id="korisnik">
-            </select>
-        </div>
+<div class="container">
+    <div class="p-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <label class="form-label">Korisnik</label>
+                <select class="form-control" id="korisnik">
+                </select>
+            </div>
 
-        <div class="col-lg-3">
-            <label class="form-label">Lezaljka</label>
-            <select class="form-control" id="lezaljka">
-            </select>
-        </div>
+            <div class="col-lg-3">
+                <label class="form-label">Lezaljka</label>
+                <select class="form-control" id="lezaljka">
+                </select>
+            </div>
 
-        <div class="col-lg-3">
-            <label class="form-label">Datum pocetka</label>
-            <input type="datetime-local" class="form-control" id="datumPocetka"/>
-        </div>
+            <div class="col-lg-3">
+                <label class="form-label">Datum pocetka</label>
+                <input type="datetime-local" class="form-control" id="datumPocetka"/>
+            </div>
 
-        <div class="col-lg-3">
-            <label class="form-label">Datum kraja</label>
-            <input type="datetime-local" class="form-control" id="datumKraja"/>
-        </div>
+            <div class="col-lg-3">
+                <label class="form-label">Datum kraja</label>
+                <input type="datetime-local" class="form-control" id="datumKraja"/>
+            </div>
 
-        <div class="col-lg-12 pt-3">
-            <button class="btn btn-danger">Očisti</button>
-            <button class="btn btn-success" id="saveButton">Sačuvaj</button>
-        </div>
+            <div class="col-lg-12 pt-3">
+                <button class="btn btn-danger">Očisti</button>
+                <button class="btn btn-success" id="saveButton">Sačuvaj</button>
+            </div>
 
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>ID lezaljke</th>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Plaza</th>
-                <th>Mobilijar</th>
-                <th>Cijena</th>
-                <th>Datum pocetka</th>
-                <th>Datum kraja</th>
-            </tr>
-            <g:each in="${allRes}" var="thisRes">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table border="1">
                 <tr>
-                    <td>${thisRes.id}</td>
-                    <td>${thisRes.lezaljka.id}</td>
-                    <td>${thisRes.korisnik.ime}</td>
-                    <td>${thisRes.korisnik.prezime}</td>
-                    <td>${thisRes.lezaljka.plaza.naziv}</td>
-                    <td>${thisRes.lezaljka.tipLezaljke.naziv}</td>
-                    <td>${thisRes.lezaljka.cijena} €</td>
-                    <td>${thisRes.datumPocetka}</td>
-                    <td>${thisRes.datumKraja}</td>
+                    <th>ID</th>
+                    <th>ID lezaljke</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Plaza</th>
+                    <th>Mobilijar</th>
+                    <th>Cijena</th>
+                    <th>Datum pocetka</th>
+                    <th>Datum kraja</th>
                 </tr>
-            </g:each>
-        </table>
+                <g:each in="${allRes}" var="thisRes">
+                    <tr>
+                        <td>${thisRes.id}</td>
+                        <td>${thisRes.lezaljka.id}</td>
+                        <td>${thisRes.korisnik.ime}</td>
+                        <td>${thisRes.korisnik.prezime}</td>
+                        <td>${thisRes.lezaljka.plaza.naziv}</td>
+                        <td>${thisRes.lezaljka.tipLezaljke.naziv}</td>
+                        <td>${thisRes.lezaljka.cijena} €</td>
+                        <td>${thisRes.datumPocetka}</td>
+                        <td>${thisRes.datumKraja}</td>
+                    </tr>
+                </g:each>
+            </table>
+        </div>
     </div>
 </div>
 

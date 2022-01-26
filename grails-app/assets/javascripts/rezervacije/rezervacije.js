@@ -23,7 +23,7 @@ function saveRecordMethod(){
                 let jsonResponse = JSON.parse(xhr.responseText);
                 if(jsonResponse["success"]){
                     Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: jsonResponse["message"],
                         showConfirmButton: true,

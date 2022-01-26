@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../main/index">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-umbrella-beach"></i>
             </div>
@@ -64,6 +64,12 @@
                 <span>Korisnici</span>
             </g:link>
         </li>
+    <li class="nav-item">
+        <g:link controller="main" action="plaza" class="nav-link">
+            <i class="fas fa-umbrella-beach"></i>
+            <span>Plaza</span>
+        </g:link>
+    </li>
         <li class="nav-item">
             <g:link controller="main" action="lezaljka" class="nav-link">
                 <i class="fas fa-bed"></i>
@@ -71,15 +77,9 @@
             </g:link>
         </li>
     <li class="nav-item">
-        <g:link controller="main" action="plaza" class="nav-link">
-            <i class="fas fa-umbrella-beach"></i>
-            <span>Plaza</span>
-        </g:link>
-    </li>
-    <li class="nav-item">
         <g:link controller="main" action="rezervacije" class="nav-link">
             <i class="fas fa-book"></i>
-            <span>Rezervacije</span>
+            <span style="font-size: 1.2rem">Rezervacije</span>
         </g:link>
     </li>
         <!-- Divider -->

@@ -1,13 +1,14 @@
-document.querySelector("#saveButton").addEventListener("click",saveRecordMethod);
+document.querySelector("#saveButton").addEventListener("click", saveRecordMethod);
 loadUsers()
-function saveRecordMethod(){
-let ime = document.querySelector("#ime").value;
-let prezime = document.querySelector("#prezime").value;
-let mail = document.querySelector("#email").value;
-let params = new FormData();
-params.append("ime",ime);
-params.append("prezime",prezime);
-params.append("email",mail);
+
+function saveRecordMethod() {
+    let ime = document.querySelector("#ime").value;
+    let prezime = document.querySelector("#prezime").value;
+    let mail = document.querySelector("#email").value;
+    let params = new FormData();
+    params.append("ime", ime);
+    params.append("prezime", prezime);
+    params.append("email", mail);
     let xhr = new XMLHttpRequest();
     xhr.open('POST', saveMethodUrl, true);
     xhr.send(params);
@@ -16,9 +17,9 @@ params.append("email",mail);
         if (this.readyState === 4) {
             if (this.status === 200) {
                 let jsonResponse = JSON.parse(xhr.responseText);
-                if(jsonResponse["success"]){
+                if (jsonResponse["success"]) {
                     Swal.fire({
-                        position: 'top-end',
+                        position: 'center',
                         icon: 'success',
                         title: jsonResponse["message"],
                         showConfirmButton: true,
@@ -41,8 +42,8 @@ params.append("email",mail);
     }
 }
 
-function loadUsers(){
-    let tipLezaljke= document.querySelector("#tipLezaljke");
+function loadUsers() {
+    let tipLezaljke = document.querySelector("#tipLezaljke");
     tipLezaljke.innerHTML = "";
     let params = new FormData();
     let xhr = new XMLHttpRequest();
@@ -52,8 +53,8 @@ function loadUsers(){
         if (this.readyState === 4) {
             if (this.status === 200) {
                 let jsonResponse = JSON.parse(xhr.responseText);
-                if(jsonResponse["success"] === true && jsonResponse["data"].length > 0){
-                    jsonResponse["data"].forEach( function (response) {
+                if (jsonResponse["success"] === true && jsonResponse["data"].length > 0) {
+                    jsonResponse["data"].forEach(function (response) {
                         let option = document.createElement("option");
                         option.value = response.id;
                         option.text = response.name;
@@ -64,3 +65,4 @@ function loadUsers(){
         }
     }
 }
+
