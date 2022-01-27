@@ -37,11 +37,11 @@ class MainController {
         }
     }
 
-    def rezervisanaLezaljka() {
-        if (params.id) {
-            Lezaljka lezaljka = Lezaljka.get(params.id as Long)
-            def rezervacijaList = Rezervacije.findAllByLezaljka(lezaljka)
-            render(view: 'lista2', model: [rezLista: rezervacijaList])
-        }
-    }
+//    def rezervisanaLezaljka() {
+//        if (params.id) {
+//            Lezaljka lezaljka = Lezaljka.get(params.id as Long)
+//            def rezervacijaList = Rezervacije.findAllByLezaljka(lezaljka)
+//            render(view: 'lista2', model: [rezLista: rezervacijaList])
+//        }
+//    }
 }

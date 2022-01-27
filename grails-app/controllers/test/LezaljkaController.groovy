@@ -66,18 +66,23 @@ class LezaljkaController {
         render([success: true, data: data] as JSON)
     }
 
-    def findAllLezaljkeForBeach(){
+    def findAllLezaljkeForBeach() {
         Date today = new Date()
         def data = []
         def allLezaljke = Lezaljka.findAllByPlaza(Plaza.get(params.idPlaza as Long))
-        allLezaljke.each { a->
-            def rezervacije = Rezervacije.findByLezaljkaAndDatumKrajaGreaterThan(a,today)
-            if(rezervacije){
-                data += [id: a.id,name: a.tipLezaljke?.naziv, active: true]
+        def allRezervacije = Rezervacije.findAllByLezaljka(Lezaljka.get(params.idLezaljka as Long))
+        allLezaljke.each { a ->
+            def rezervacije = Rezervacije.findByLezaljkaAndDatumKrajaGreaterThan(a, today)
+            if (rezervacije) {
+                data += [id: a.id, name: a.tipLezaljke?.naziv, active: true]
             } else {
-                data += [id: a.id,name: a.tipLezaljke?.naziv,active : false]
+                data += [id: a.id, name: a.tipLezaljke?.naziv, active: false]
             }
         }
+        allRezervacije.each {a->
+            data += [id2: a.id, name2: a.korisnik.ime, lastname2: a.korisnik.prezime, active2: true]
+        }
+
         render([success: true, data: data] as JSON)
     }
 }
