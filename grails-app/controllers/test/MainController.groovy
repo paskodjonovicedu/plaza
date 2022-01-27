@@ -31,11 +31,9 @@ class MainController {
         render(view: "rezervacije", model: [allRes: rezervacijeList])
     }
 
-    def lezaljkeZaPlazu() {
-        if (params.id) {
-            Plaza plaza = Plaza.get(params.id as Long)
-            def lezaljkaList = Lezaljka.findAllByPlaza(plaza)
-            render(view: "lista", model: [lezaljkaList: lezaljkaList])
+    def lezaljkeZaPlazu(Long id) {
+        if (id) {
+            render(view: "lista", model: [idPlaza: id])
         }
     }
 
@@ -45,11 +43,5 @@ class MainController {
             def rezervacijaList = Rezervacije.findAllByLezaljka(lezaljka)
             render(view: 'lista2', model: [rezLista: rezervacijaList])
         }
-    }
-    def sveRezervacije () {
-//        Plaza plaza = Plaza.get(params.id as Long)
-        def listaLezaljka = Lezaljka.findAll()
-        def listaSveRez = Rezervacije.findAll()
-        render(view: 'sverez', model: [sverez:listaSveRez, svelez:listaLezaljka])
     }
 }

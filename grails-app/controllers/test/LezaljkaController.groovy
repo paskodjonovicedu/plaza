@@ -65,4 +65,19 @@ class LezaljkaController {
         }
         render([success: true, data: data] as JSON)
     }
+
+    def findAllLezaljkeForBeach(){
+        Date today = new Date()
+        def data = []
+        def allLezaljke = Lezaljka.findAllByPlaza(Plaza.get(params.idPlaza as Long))
+        allLezaljke.each { a->
+            def rezervacije = Rezervacije.findByLezaljkaAndDatumKrajaGreaterThan(a,today)
+            if(rezervacije){
+                data += [id: a.id,name: a.tipLezaljke?.naziv, active: true]
+            } else {
+                data += [id: a.id,name: a.tipLezaljke?.naziv,active : false]
+            }
+        }
+        render([success: true, data: data] as JSON)
+    }
 }
