@@ -44,5 +44,9 @@ class MainController {
             render(view: 'lista', model: [idLezaljka: id])
         }
     }
+    def istekleRezervacije () {
+        def lista = IstekleRezervacije.findAll()
+        render([])
+    }
 
 }
