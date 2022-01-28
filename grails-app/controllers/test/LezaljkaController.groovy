@@ -48,15 +48,6 @@ class LezaljkaController {
         render([success: true, message: "Uspješno ste napravili rezervaciju!"] as JSON)
     }
 
-//    def deleteAllReservation(){
-//        Date today = new Date()
-//        def list = Rezervacije.findAllByDatumKrajaLessThan(today)
-//        list.each { a->
-//            a.delete()
-//        }
-//        render([success: true, message: "Uspješno ste izbrisali!"] as JSON)
-//    }
-
     def getAllLezaljke() {
         def data = []
         def allLezaljke = Lezaljka.findAllByIsActive(true)
@@ -70,7 +61,6 @@ class LezaljkaController {
         Date today = new Date()
         def data = []
         def allLezaljke = Lezaljka.findAllByPlaza(Plaza.get(params.idPlaza as Long))
-        def allRezervacije = Rezervacije.findAllByLezaljka(Lezaljka.get(params.idLezaljka as Long))
         allLezaljke.each { a ->
             def rezervacije = Rezervacije.findByLezaljkaAndDatumKrajaGreaterThan(a, today)
             if (rezervacije) {
@@ -79,10 +69,13 @@ class LezaljkaController {
                 data += [id: a.id, name: a.tipLezaljke?.naziv, active: false]
             }
         }
-        allRezervacije.each {a->
-            data += [id2: a.id, name2: a.korisnik.ime, lastname2: a.korisnik.prezime, active2: true]
-        }
+        render([success: true, data: data] as JSON)
+    }
 
+    def findAllRezervacijeForLezaljka() {
+        Date today = new Date()
+        Rezervacije a = Rezervacije.findByLezaljkaAndDatumKrajaGreaterThan(Lezaljka.get(params.idLezaljka as Long),today)
+        def data =[id: a.id, name: a.korisnik.ime + ' ' + a.korisnik.prezime, lezaljka: a.lezaljka.plaza.naziv + " / " + a.lezaljka.id, datumPocetka: a.datumPocetka, datumKraja: a.datumKraja]
         render([success: true, data: data] as JSON)
     }
 }

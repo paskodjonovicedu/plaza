@@ -5,8 +5,10 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class MainController {
+    DailyTasksService dailyTasksService
 
     def index() {
+        dailyTasksService.deleteAllReservation()
         def plazaList = Plaza.findAllByIsActive(true)
         render(view: "index", model: [plazaList: plazaList])
     }
@@ -37,11 +39,10 @@ class MainController {
         }
     }
 
-//    def rezervisanaLezaljka() {
-//        if (params.id) {
-//            Lezaljka lezaljka = Lezaljka.get(params.id as Long)
-//            def rezervacijaList = Rezervacije.findAllByLezaljka(lezaljka)
-//            render(view: 'lista2', model: [rezLista: rezervacijaList])
-//        }
-//    }
+    def rezervacijeZaLezaljku(long id) {
+        if (id) {
+            render(view: 'lista', model: [idLezaljka: id])
+        }
+    }
+
 }

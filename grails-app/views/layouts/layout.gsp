@@ -79,7 +79,7 @@
     <li class="nav-item">
         <g:link controller="main" action="rezervacije" class="nav-link">
             <i class="fas fa-book"></i>
-            <span style="font-size: 1.2rem">Rezervacije</span>
+            <span>Rezervacije</span>
         </g:link>
     </li>
         <!-- Divider -->

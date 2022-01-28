@@ -17,8 +17,43 @@
     <div class="row p-3" id="lezaljkaArea"></div>
 </div>
 
+<div class="modall2 hidden" id="modalDisplay">
+    <button class="close-modal2">&times;</button>
+
+    <div class="container">
+        <div class="p-5">
+            <div class="row">
+                <div class="col-lg-12 mb-3">
+                    <label class="form-label">Korisnik</label><br>
+                    <select class="form-control" id="korisnik2">
+                    </select>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                    <label class="form-label">Lezaljka</label>
+                    <select class="form-control" id="lezaljka2"></select>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                    <label class="form-label">Datum pocetka</label>
+                    <input type="datetime-local" class="form-control" id="datumPocetka2"/>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                    <label class="form-label">Datum kraja</label>
+                    <input type="datetime-local" class="form-control" id="datumKraja2"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="overlayy2 hidden"></div>
+
+
 <div class="modall hidden" id="modalDisplay">
     <button class="close-modal">&times;</button>
+
     <div class="container">
         <div class="p-5">
             <div class="row">
@@ -56,19 +91,20 @@
 <div class="overlayy hidden"></div>
 
 <script>
-    const rezervacije = '${g.createLink(controller: 'main',action: 'rezervisanaLezaljka')}',
-        loadLezaljkeZaPlazuUrl = '${g.createLink(controller: 'lezaljka',action: 'findAllLezaljkeForBeach')}',
+    const loadLezaljkeZaPlazuUrl = '${g.createLink(controller: 'lezaljka',action: 'findAllLezaljkeForBeach')}',
         saveMethodUrl = '${g.createLink(controller: 'lezaljka',action: 'saveBeach')}',
         loadUsersUrl = '${g.createLink(controller: 'rezervacije',action: 'getAllUsers')}',
-        loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}';
-
+        loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}',
+        loadRezervacijeZaLezaljkuUrl = '${g.createLink(controller: 'lezaljka',action: 'findAllRezervacijeForLezaljka')}';
 </script>
 <script>
     const modall = document.querySelector('.modall');
+    const modall2 = document.querySelector('.modall2');
     const overlayy = document.querySelector('.overlayy');
+    const overlayy2 = document.querySelector('.overlayy2');
     const btnCloseModal = document.querySelector('.close-modal');
+    const btnCloseModal2 = document.querySelector('.close-modal2');
     const btnsOpenModal = document.querySelectorAll('.show-modall');
-    const div = document.querySelector('.div');
 
     let idPlaza = '${idPlaza}';
 
@@ -76,20 +112,11 @@
     const closeModal = function () {
         modall.classList.add('hidden');
         overlayy.classList.add('hidden');
-        document.location.reload();
-
     };
-
-    btnCloseModal.addEventListener('click', closeModal);
-    overlayy.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', function (e) {
-        // console.log(e.key);
-
-        if (e.key === 'Escape' && !modall.classList.contains('hidden')) {
-            closeModal();
-        }
-    });
+    const closeModal2 = function () {
+        modall2.classList.add('hidden');
+        overlayy2.classList.add('hidden');
+    };
 
     // function redirectMethod(id) {
     //     window.open(redirectUrl + "/" + id, "_self")
@@ -118,13 +145,13 @@
                                     "                    <div class=\"row no-gutters align-items-center\">\n" +
                                     "                        <div class=\"col mr-2\">\n" +
                                     "                            <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">\n" +
-                                    "                                " + response.id + "</div>\n" +
+                                    "                                Rezervisano</div>\n" +
                                     "\n" +
                                     "                            <div class=\"h5 mb-0 font-weight-bold text-gray-800\"> " + response.name + "</div>\n" +
                                     "                        </div>\n" +
                                     "\n" +
                                     "                        <div class=\"col-auto\">\n" +
-                                    "                            <i class=\"fas fa-umbrella-beach fa-2x text-gray-300\"></i>\n" +
+                                    "                            <i class=\"fas fa-umbrella-beach fa-2x text-gray-300\" style='color: red!important;'></i>\n" +
                                     "                        </div>\n" +
                                     "                    </div>\n" +
                                     "                </div>\n" +
@@ -137,13 +164,13 @@
                                     "                    <div class=\"row no-gutters align-items-center\">\n" +
                                     "                        <div class=\"col mr-2\">\n" +
                                     "                            <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">\n" +
-                                    "                                " + response.id + "</div>\n" +
+                                    "                                Slobodno</div>\n" +
                                     "\n" +
                                     "                            <div class=\"h5 mb-0 font-weight-bold text-gray-800\"> " + response.name + "</div>\n" +
                                     "                        </div>\n" +
                                     "\n" +
                                     "                        <div class=\"col-auto\">\n" +
-                                    "                            <i class=\"fas fa-umbrella-beach fa-2x text-gray-300\"></i>\n" +
+                                    "                            <i class=\"fas fa-umbrella-beach fa-2x text-gray-300\" style='color: green!important;'></i>\n" +
                                     "                        </div>\n" +
                                     "                    </div>\n" +
                                     "                </div>\n" +
@@ -160,67 +187,76 @@
         }
     }
 
+    let idLezaljka = '${idLezaljka}'
+
     loadLezaljkeMethod();
 
     function openModalMethod(id, active) {
-        const modall = document.querySelector('.modall');
-        const overlayy = document.querySelector('.overlayy');
-        modall.classList.remove('hidden');
-        overlayy.classList.remove('hidden');
-
-        // let rezervisiModal = "" +
-        //     "<div class=\"container\">\n" +
-        //     "    <div class=\"p-5\">\n" +
-        //     "        <div class=\"row\">\n" +
-        //     "            <div class=\"col-lg-12 mb-5\">\n" +
-        //     "                <label class=\"form-label\">Korisnik</label>\n" +
-        //     "                <select class=\"form-control\" id=\"korisnik\">\n" +
-        //     "                </select>\n" +
-        //     "            </div>\n" +
-        //     "\n" +
-        //     "            <div class=\"col-lg-12 mb-5\">\n" +
-        //     "                <label class=\"form-label\">Lezaljka</label>\n" +
-        //     "                <select class=\"form-control\" id=\"lezaljka\">\n" +
-        //     "                </select>\n" +
-        //     "            </div>\n" +
-        //     "\n" +
-        //     "            <div class=\"col-lg-12 mb-5\">\n" +
-        //     "                <label class=\"form-label\">Datum pocetka</label>\n" +
-        //     "                <input type=\"datetime-local\" class=\"form-control\" id=\"datumPocetka\"/>\n" +
-        //     "            </div>\n" +
-        //     "\n" +
-        //     "            <div class=\"col-lg-12 mb-5\">\n" +
-        //     "                <label class=\"form-label\">Datum kraja</label>\n" +
-        //     "                <input type=\"datetime-local\" class=\"form-control\" id=\"datumKraja\"/>\n" +
-        //     "            </div>\n" +
-        //     "\n" +
-        //     "            <div class=\"col-lg-12 pt-3\">\n" +
-        //     "                <button class=\"btn btn-danger\">Očisti</button>\n" +
-        //     "                <button class=\"btn btn-success\" id=\"saveButton\">Sačuvaj</button>\n" +
-        //     "            </div>\n" +
-        //     "\n" +
-        //     "        </div>\n" +
-        //     "    </div>\n" +
-        //     "</div>"
-
         if (active) {
+            let korisnik = document.querySelector("#korisnik2");
+            let lezaljka = document.querySelector("#lezaljka2");
+            let datumPocetka = document.querySelector("#datumPocetka2");
+            let datumKraja = document.querySelector("#datumKraja2");
+            korisnik.innerHTML = "";
+            lezaljka.innerHTML = '';
+            datumPocetka.innerHTML = '';
+            datumKraja.innerHTML = '';
+            let params = new FormData();
+            params.append("idLezaljka", id);
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', loadRezervacijeZaLezaljkuUrl, true);
+            xhr.send(params);
+            //openModalSpinner();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        let jsonResponse = JSON.parse(xhr.responseText);
+                        let data = jsonResponse["data"];
+                        if (jsonResponse["success"]) {
+                            let option = document.createElement("option");
+                            let option2 = document.createElement("option")
+                            option.text = data.name;
+                            option2.text = data.lezaljka;
+                            korisnik.appendChild(option);
+                            lezaljka.appendChild(option2)
+
+                            let date = new Date(data.datumPocetka);
+                            let date2 = new Date(data.datumKraja)
+                            datumPocetka.value = date.toISOString().slice(0, 16);
+                            datumKraja.value = date2.toISOString().slice(0, 16)
+
+                            document.querySelector('#korisnik2').disabled = true;
+                            document.querySelector('#lezaljka2').disabled = true;
+                            document.querySelector('#datumPocetka2').disabled = true;
+                            document.querySelector('#datumKraja2').disabled = true;
+                        }
+                    }
+                }
+            }
+            modall2.classList.remove('hidden');
+            overlayy2.classList.remove('hidden');
+
         } else {
             document.querySelector("#lezaljka").disabled = true;
             document.querySelector("#lezaljka").value = id;
+            modall.classList.remove('hidden');
+            overlayy.classList.remove('hidden');
         }
     }
-    document.querySelector("#saveButton").addEventListener("click",saveRecordMethod);
+
+    document.querySelector("#saveButton").addEventListener("click", saveRecordMethod);
     loadUsers();
     loadLezaljke();
-    function saveRecordMethod(){
+
+    function saveRecordMethod() {
         let korisnik = document.querySelector("#korisnik").value;
         let lezaljka = document.querySelector("#lezaljka").value;
         let datumPocetka = document.querySelector("#datumPocetka").value;
         let datumKraja = document.querySelector("#datumKraja").value;
 
         let params = new FormData();
-        params.append("korisnik",korisnik);
-        params.append("lezaljka",lezaljka);
+        params.append("korisnik", korisnik);
+        params.append("lezaljka", lezaljka);
         params.append("datumPocetka", datumPocetka);
         params.append("datumKraja", datumKraja);
 
@@ -232,7 +268,7 @@
             if (this.readyState === 4) {
                 if (this.status === 200) {
                     let jsonResponse = JSON.parse(xhr.responseText);
-                    if(jsonResponse["success"]){
+                    if (jsonResponse["success"]) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -258,8 +294,8 @@
         }
     }
 
-    function loadUsers(){
-        let korisnik= document.querySelector("#korisnik");
+    function loadUsers() {
+        let korisnik = document.querySelector("#korisnik");
         korisnik.innerHTML = "";
         let params = new FormData();
         let xhr = new XMLHttpRequest();
@@ -269,8 +305,8 @@
             if (this.readyState === 4) {
                 if (this.status === 200) {
                     let jsonResponse = JSON.parse(xhr.responseText);
-                    if(jsonResponse["success"] === true && jsonResponse["data"].length > 0){
-                        jsonResponse["data"].forEach( function (response) {
+                    if (jsonResponse["success"] === true && jsonResponse["data"].length > 0) {
+                        jsonResponse["data"].forEach(function (response) {
                             let option = document.createElement("option");
                             option.value = response.id;
                             option.text = response.name;
@@ -282,8 +318,8 @@
         }
     }
 
-    function loadLezaljke(){
-        let lezaljka= document.querySelector("#lezaljka");
+    function loadLezaljke() {
+        let lezaljka = document.querySelector("#lezaljka");
         lezaljka.innerHTML = "";
         let params = new FormData();
         let xhr = new XMLHttpRequest();
@@ -293,8 +329,8 @@
             if (this.readyState === 4) {
                 if (this.status === 200) {
                     let jsonResponse = JSON.parse(xhr.responseText);
-                    if(jsonResponse["success"] === true && jsonResponse["data"].length > 0){
-                        jsonResponse["data"].forEach( function (response) {
+                    if (jsonResponse["success"] === true && jsonResponse["data"].length > 0) {
+                        jsonResponse["data"].forEach(function (response) {
                             let option = document.createElement("option");
                             option.value = response.id;
                             option.text = response.name;
@@ -305,6 +341,20 @@
             }
         }
     }
+    btnCloseModal2.addEventListener('click', closeModal2);
+    btnCloseModal.addEventListener('click', closeModal);
+    overlayy.addEventListener('click', closeModal);
+    overlayy2.addEventListener('click', closeModal2)
+
+    document.addEventListener('keydown', function (e) {
+
+        if (e.key === 'Escape' && !modall.classList.contains('hidden')) {
+            closeModal();
+        }
+        if (e.key === 'Escape' && !modall2.classList.contains('hidden')) {
+            closeModal2();
+        }
+    });
 
 </script>
 </body>

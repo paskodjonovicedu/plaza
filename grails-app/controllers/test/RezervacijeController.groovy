@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class RezervacijeController {
-    def saveRecord  () {
+    def saveRecord() {
         Rezervacije rezervacije = new Rezervacije()
         rezervacije.korisnik = Korisnik.get(params.korisnik as Long)
         rezervacije.lezaljka = Lezaljka.get(params.lezaljka as Long)
@@ -15,22 +15,23 @@ class RezervacijeController {
         render([success: true, message: "Uspjesno ste rezervisali!"] as JSON)
 
     }
-    def getAllUsers(){
+
+    def getAllUsers() {
         def data = []
         def allUsers = Korisnik.findAllByIsActive(true)
-        allUsers.each { user->
-            data += [id: user.id,name: user.ime]
+        allUsers.each { user ->
+            data += [id: user.id, name: user.ime]
         }
-        render([success:true,data: data] as JSON)
+        render([success: true, data: data] as JSON)
     }
 
     def getAllBeaches() {
         def data = []
         def allBeaches = Plaza.findAllByIsActive(true)
-        allBeaches.each {beach->
+        allBeaches.each { beach ->
             data += [id: beach.id, name: beach.naziv]
         }
-        render([success:true,data: data] as JSON)
+        render([success: true, data: data] as JSON)
     }
 
 }
