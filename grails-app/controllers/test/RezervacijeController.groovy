@@ -34,4 +34,17 @@ class RezervacijeController {
         render([success: true, data: data] as JSON)
     }
 
+    def deleteReservation() {
+        try {
+            Rezervacije rezervacije = Rezervacije.findByLezaljka(Lezaljka.get(params.id as Long))
+            if (rezervacije) {
+                rezervacije.delete()
+            }
+            render([success: true, message: "Uspješno ste izbrisali rezervaciju!"] as JSON)
+        } catch (Exception e) {
+            render([success: false, message: e.message] as JSON)
+        }
+
+    }
+
 }

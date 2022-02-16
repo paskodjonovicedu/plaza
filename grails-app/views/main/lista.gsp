@@ -44,6 +44,10 @@
                     <input type="datetime-local" class="form-control" id="datumKraja2"/>
                 </div>
 
+                <div class="col-lg-12 mb-3 mt-3">
+                    <button class="btn btn-danger" id="deleteReservation" onclick="deleteReservation()">Izbrisi rezervaciju</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -95,7 +99,8 @@
         saveMethodUrl = '${g.createLink(controller: 'lezaljka',action: 'saveBeach')}',
         loadUsersUrl = '${g.createLink(controller: 'rezervacije',action: 'getAllUsers')}',
         loadLezaljkesUrl = '${g.createLink(controller: 'lezaljka', action: 'getAllLezaljke')}',
-        loadRezervacijeZaLezaljkuUrl = '${g.createLink(controller: 'lezaljka',action: 'findAllRezervacijeForLezaljka')}';
+        loadRezervacijeZaLezaljkuUrl = '${g.createLink(controller: 'lezaljka',action: 'findAllRezervacijeForLezaljka')}',
+        deleteUrl =  '${g.createLink(controller: 'rezervacije',action: 'deleteReservation')}';
 </script>
 <script>
     const modall = document.querySelector('.modall');
@@ -107,6 +112,7 @@
     const btnsOpenModal = document.querySelectorAll('.show-modall');
 
     let idPlaza = '${idPlaza}';
+    let globalniId = 0;
 
 
     const closeModal = function () {
@@ -187,11 +193,12 @@
         }
     }
 
-    let idLezaljka = '${idLezaljka}'
+    let idLezaljka = '${idLezaljka}';
 
     loadLezaljkeMethod();
 
     function openModalMethod(id, active) {
+        globalniId = id;
         if (active) {
             let korisnik = document.querySelector("#korisnik2");
             let lezaljka = document.querySelector("#lezaljka2");
@@ -337,6 +344,43 @@
                             lezaljka.appendChild(option);
                         });
                     }
+                }
+            }
+        }
+    }
+
+    function deleteReservation(){
+        let params = new FormData();
+        params.append("id", globalniId);
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', deleteUrl, true);
+        xhr.send(params);
+        //openModalSpinner();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    let jsonResponse = JSON.parse(xhr.responseText);
+                    if (jsonResponse["success"]) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: jsonResponse["message"],
+                            showConfirmButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: jsonResponse["message"],
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+
                 }
             }
         }

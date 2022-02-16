@@ -22,7 +22,7 @@
     <g:layoutHead/>
 </head>
 
-<body>
+<body onclick="clearNotification()">
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -145,13 +145,14 @@
                         </div>
                     </li>
 
+
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1" onclick="otvori()">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
                             <!-- Counter - Alerts -->
-                            <span class="izbrisiBadge badge badge-danger badge-counter">3+</span>
+                            <span class="izbrisiBadge badge badge-danger badge-counter"></span>
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -160,19 +161,12 @@
                                 Alerts Center
                             </h6>
 
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-white">
-                                        <i class="fas fa-exclamation-circle fa-lg" style="color: red!important;"></i>
-                                    </div>
-                                </div>
+                            <div id="istekle">
+                                <a class="dropdown-item d-flex align-items-center" href="#">
 
-                                <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                </a>
+                            </div>
+
                         </div>
                     </li>
 
@@ -215,6 +209,12 @@
             </nav>
             <!-- End of Topbar -->
             <g:layoutBody/>
+
+            <script>
+                const loadIstekleUrl = '${g.createLink(controller: 'istekleRezervacije', action: 'istekleRezervacije')}',
+                    clearNotificationUrl = '${g.createLink(controller: 'istekleRezervacije', action: 'clearNotification')}';
+            </script>
+
 
             <asset:javascript src="jquery.min.js"></asset:javascript>
             <asset:javascript src="bootstrap.bundle.min.js"></asset:javascript>

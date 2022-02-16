@@ -23,8 +23,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 ${plaza.lokacija}</div>
+
                             <div class="h5 mb-0 font-weight-bold text-gray-800">${plaza.naziv}</div>
                         </div>
+
                         <div class="col-auto">
                             <i class="fas fa-umbrella-beach fa-2x text-gray-300"></i>
                         </div>
@@ -35,8 +37,11 @@
     </g:each>
 </div>
 
+
+
 <script>
     const redirectUrl = '${g.createLink(controller: 'main',action: 'lezaljkeZaPlazu')}';
+
 
     function redirectMethod(id) {
         window.open(redirectUrl + "/" + id, "_self")
